@@ -77,14 +77,14 @@ mvn clean install
 mvn spring-boot:run
 ```
 
-The API will be available at http://localhost:8082/api
+The API will be available at http://localhost:8080/api
 
 ### API Documentation
 
 Once the application is running, you can access the API documentation at:
 
-- Swagger UI: http://localhost:8082/api/swagger-ui
-- OpenAPI Spec: http://localhost:8082/api/docs
+- Swagger UI: http://localhost:8080/api/swagger-ui
+- OpenAPI Spec: http://localhost:8080/api/docs
 
 ## API Endpoints
 

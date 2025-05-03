@@ -6,9 +6,10 @@ services:
     container_name: psn-rwanda-backend
     restart: always
     ports:
-      - "8082:8082"
+      - "4040:4040"
     environment:
       - SPRING_PROFILES_ACTIVE=prod
+      - SERVER_PORT=4040
       # Database configuration
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/psn_rwanda
       - SPRING_DATASOURCE_USERNAME=postgres

@@ -1,0 +1,70 @@
+# Set default behavior to automatically normalize line endings
+* text=auto
+
+# Java source files
+*.java text
+*.kt text
+*.groovy text
+
+# XML files
+*.xml text
+*.xsd text
+*.xsl text
+
+# Properties files
+*.properties text
+*.yml text
+*.yaml text
+
+# Shell scripts - ensure Unix-style line endings for shell scripts
+*.sh text eol=lf
+mvnw text eol=lf
+
+# Windows scripts - ensure Windows-style line endings for Windows scripts
+*.bat text eol=crlf
+*.cmd text eol=crlf
+mvnw.cmd text eol=crlf
+
+# HTML, CSS, JavaScript
+*.html text
+*.css text
+*.js text
+*.ts text
+*.tsx text
+*.jsx text
+*.json text
+
+# Documentation
+*.md text
+*.txt text
+LICENSE text
+
+# Binary files - do not modify
+*.jar binary
+*.war binary
+*.ear binary
+*.db binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.mov binary
+*.mp4 binary
+*.mp3 binary
+*.pdf binary
+*.psd binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.svg binary
+
+# SQL files
+*.sql text eol=lf
+
+# Docker files
+Dockerfile text
+.dockerignore text
+docker-compose.yml text
+docker-compose.*.yml text 

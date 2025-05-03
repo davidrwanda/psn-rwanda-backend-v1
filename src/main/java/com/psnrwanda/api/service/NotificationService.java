@@ -39,7 +39,7 @@ public class NotificationService {
     @Value("${spring.mail.username:info@psnrwanda.com}")
     private String fromEmail;
     
-    @Value("${app.url:http://localhost:8082}")
+    @Value("${app.url:http://localhost:8080}")
     private String appUrl;
     
     @Value("${app.notification.provider-email:info@oneclic.vet}")

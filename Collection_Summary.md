@@ -83,7 +83,7 @@ The Postman collection for PSN RWANDA Ltd's website includes **30+ API endpoints
 
 - **API Format**: RESTful JSON
 - **Authentication**: JWT Bearer Tokens
-- **Development Base URL**: http://localhost:8082
+- **Development Base URL**: http://localhost:8080
 - **Production Base URL**: To be configured
 
 ---

@@ -7,13 +7,14 @@ services:
       dockerfile: Dockerfile
     container_name: psn-rwanda-backend-dev
     ports:
-      - "8082:8082"
+      - "4040:4040"
     environment:
       - SPRING_PROFILES_ACTIVE=dev
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/psn_rwanda
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
       - APP_FILE_UPLOAD_DIR=/app/uploads
+      - SERVER_PORT=4040
     volumes:
       - ./uploads:/app/uploads
     depends_on:

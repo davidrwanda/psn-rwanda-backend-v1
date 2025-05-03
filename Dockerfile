@@ -31,7 +31,8 @@ COPY src/main/resources/application.properties /app/application.properties
 # Set environment variables
 ENV SPRING_CONFIG_LOCATION=file:/app/application.properties
 ENV UPLOAD_DIR=/app/uploads
+ENV SERVER_PORT=4040
 
-EXPOSE 8082
+EXPOSE 4040
 
-ENTRYPOINT ["java", "-cp", "app:app/lib/*", "com.psnrwanda.api.ApiApplication"] 
+ENTRYPOINT ["java", "-cp", "app:app/lib/*", "-Dserver.port=4040", "com.psnrwanda.api.ApiApplication"] 

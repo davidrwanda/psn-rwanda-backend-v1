@@ -43,7 +43,7 @@ The Postman collection includes the following endpoint categories:
    - Click on "Environments" in Postman
    - Create a new environment (e.g., "PSN Rwanda Dev")
    - Add the following variables:
-     - `baseUrl`: The base URL of your API (default: http://localhost:8082)
+     - `baseUrl`: The base URL of your API (default: http://localhost:4040)
      - `authToken`: Will be automatically set after successful login
      - `refreshToken`: Will be automatically set after successful login
 
@@ -239,6 +239,16 @@ docker-compose -f docker-compose.prod.yml up -d
 
 This project uses GitHub Actions for continuous integration and deployment.
 
+### GitHub Secrets Configuration
+
+For security reasons, sensitive credentials are stored as GitHub repository secrets. You need to configure the following secrets in your GitHub repository:
+
+1. Go to your GitHub repository
+2. Navigate to "Settings" > "Secrets and variables" > "Actions"
+3. Add the following secrets:
+   - `DOCKER_HUB_PAT`: Your Docker Hub Personal Access Token
+   - `SERVER_PASSWORD`: The password for the deployment server
+
 ### Workflow
 
 The CI/CD pipeline consists of the following steps:
@@ -246,8 +256,8 @@ The CI/CD pipeline consists of the following steps:
 1. **Build**: Compiles the application using Maven
 2. **Test**: Runs unit and integration tests
 3. **Build Docker Image**: Creates a Docker image for the application
-4. **Push to Docker Hub**: Pushes the image to Docker Hub
-5. **Deploy**: Deploys the application to the production server
+4. **Push to Docker Hub**: Pushes the image to Docker Hub using the `DOCKER_HUB_PAT` secret
+5. **Deploy**: Deploys the application to the production server using the `SERVER_PASSWORD` secret
 
 ### Deployment
 
@@ -279,7 +289,7 @@ The production server is configured with Docker and Docker Compose.
 
 ### Accessing the Application
 
-The backend application is running on port 8082 on the production server.
+The backend application is running on port 4040 on the production server.
 
 ## Environment Variables
 

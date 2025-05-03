@@ -1,0 +1,125 @@
+### Java ###
+# Compiled class files
+*.class
+
+# Log files
+*.log
+logs/
+
+# Package files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Exception for Maven wrapper
+!.mvn/wrapper/maven-wrapper.jar
+!mvnw
+!mvnw.cmd
+
+# JVM crash logs
+hs_err_pid*
+replay_pid*
+
+### Maven ###
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+### Spring Boot ###
+**/application-local.properties
+**/application-local.yml
+**/application-dev-local.properties
+**/bootstrap-local.properties
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+
+### VS Code ###
+.vscode/
+*.code-workspace
+
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### Docker ###
+.env
+docker-compose.override.yml
+
+# Postgres data directory
+pgdata/
+postgres-data/
+*-db-data/
+
+### System Files ###
+.DS_Store
+Thumbs.db
+*~
+*.swp
+*.swo
+
+### Application Specific ###
+# Uploads directory for file storage
+uploads/
+
+# Sensitive information
+*.pem
+*.key
+*.p12
+*.jks
+**/src/main/resources/keystore/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Node (if you have any frontend components)
+node_modules/
+npm-debug.log
+yarn-error.log
+yarn-debug.log
+
+# Test coverage reports
+/coverage/
+.coverage
+htmlcov/
+jacoco.exec
+
+# Production configuration
+**/application-prod-local.properties
+
+# For security, exclude any backup files
+**/application*.properties.bak
+**/application*.yml.bak 

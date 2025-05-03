@@ -4,7 +4,7 @@ This document provides detailed information about the PSN Rwanda API endpoints, 
 
 ## Base URL
 
-Development: `http://localhost:8082`  
+Development: `http://localhost:8080`  
 Production: `https://api.psnrwanda.com` (example)
 
 ## Authentication

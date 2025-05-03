@@ -51,12 +51,12 @@ There are several ways to test your email delivery:
 2. **Test With Attachment:**
    Use the attachment test which can help bypass spam filters:
    ```
-   curl http://localhost:8082/api/v1/test/email/test-with-attachment?to=your.email@example.com
+   curl http://localhost:8080/api/v1/test/email/test-with-attachment?to=your.email@example.com
    ```
 
 3. **View Mail Configuration:**
    ```
-   curl http://localhost:8082/api/v1/test/email/configuration
+   curl http://localhost:8080/api/v1/test/email/configuration
    ```
 
 ## 4. Email Content Improvements

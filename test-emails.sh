@@ -2,7 +2,7 @@
 
 # Script to test PSN Rwanda email templates with Infomaniak SMTP
 
-BASE_URL="http://localhost:8082"
+BASE_URL="http://localhost:8080"
 DEFAULT_EMAIL="daveleo250@gmail.com"
 
 # Parse command line arguments for email only

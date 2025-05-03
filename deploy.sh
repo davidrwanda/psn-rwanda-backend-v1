@@ -11,8 +11,15 @@ DEPLOY_DIR=${DEPLOY_DIR:-"/opt/psn_rwanda/backend"}
 
 # Check if Docker password is provided
 if [ -z "$DOCKER_PASSWORD" ]; then
-  echo "Please provide Docker password:"
-  read -s DOCKER_PASSWORD
+  # Check if running in GitHub Actions
+  if [ -n "$GITHUB_ACTIONS" ]; then
+    # In GitHub Actions, use the secret directly
+    DOCKER_PASSWORD=$DOCKER_HUB_PAT
+  else
+    # If running locally and no password provided, prompt for it
+    echo "Please provide Docker password:"
+    read -s DOCKER_PASSWORD
+  fi
 fi
 
 # Build the application
