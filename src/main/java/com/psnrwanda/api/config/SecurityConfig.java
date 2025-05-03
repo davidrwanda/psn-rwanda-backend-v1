@@ -74,6 +74,7 @@ public class SecurityConfig {
                     .requestMatchers(HttpMethod.POST, "/api/v1/bookings/public").permitAll()
                     .requestMatchers(HttpMethod.POST, "/api/v1/bookings/track").permitAll()
                     .requestMatchers(HttpMethod.POST, "/api/v1/bookings/documents/upload").permitAll()
+                    .requestMatchers(HttpMethod.POST, "/api/v1/documents/upload").permitAll()
                     
                     // Admin-only operations
                     .requestMatchers(HttpMethod.POST, "/api/v1/services/**").hasRole("ADMIN")

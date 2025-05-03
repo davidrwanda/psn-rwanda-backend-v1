@@ -8,31 +8,25 @@ RUN mvn dependency:go-offline -B
 # Copy source code
 COPY src ./src
 
-# Build the application
-RUN mvn package -DskipTests
-RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
+# Build the application with explicit packaging
+RUN mvn clean package -DskipTests
 
 # Create a lightweight final image
 FROM eclipse-temurin:17-jre-alpine
 VOLUME /tmp
-ARG DEPENDENCY=/app/target/dependency
+WORKDIR /app
 
-# Copy dependencies
-COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
-COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
-COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
+# Copy the built JAR file directly
+COPY --from=build /app/target/*.jar /app/app.jar
 
 # Create uploads directory
 RUN mkdir -p /app/uploads && chmod 777 /app/uploads
 
-# Copy application configuration files
-COPY src/main/resources/application.properties /app/application.properties
-
 # Set environment variables
-ENV SPRING_CONFIG_LOCATION=file:/app/application.properties
 ENV UPLOAD_DIR=/app/uploads
 ENV SERVER_PORT=4040
 
 EXPOSE 4040
 
-ENTRYPOINT ["java", "-cp", "app:app/lib/*", "-Dserver.port=4040", "com.psnrwanda.api.ApiApplication"] 
+# Simplified startup with the JAR file directly
+ENTRYPOINT ["java", "-jar", "/app/app.jar", "--server.port=4040"] 

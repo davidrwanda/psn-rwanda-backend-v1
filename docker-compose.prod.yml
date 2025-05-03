@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   backend:
     image: kevlargroup/psn-rwanda-backend:latest
@@ -18,7 +16,7 @@ services:
       - SPRING_MAIL_HOST=${MAIL_HOST:-mail.infomaniak.com}
       - SPRING_MAIL_PORT=${MAIL_PORT:-465}
       - SPRING_MAIL_USERNAME=${MAIL_USERNAME:-info@oneclic.vet}
-      - SPRING_MAIL_PASSWORD=${MAIL_PASSWORD}
+      - SPRING_MAIL_PASSWORD=${MAIL_PASSWORD:-changeme}
       - APP_NOTIFICATION_PROVIDER_EMAIL=${PROVIDER_EMAIL:-daveleo250@gmail.com}
       # File storage
       - APP_FILE_UPLOAD_DIR=/app/uploads

@@ -134,7 +134,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // Public booking operations
         if (uri.contains("/api/v1/bookings/public") ||
             (uri.contains("/api/v1/bookings/track") && "POST".equals(method)) ||
-            (uri.contains("/api/v1/bookings/documents/upload") && "POST".equals(method))) {
+            (uri.contains("/api/v1/bookings/documents/upload") && "POST".equals(method)) ||
+            (uri.contains("/api/v1/documents/upload") && "POST".equals(method))) {
             return true;
         }
         
