@@ -1,0 +1,67 @@
+name: PSN Rwanda Backend CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+env:
+  REGISTRY: docker.io
+  IMAGE_NAME: kevlargroup/psn-rwanda-backend
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build with Maven
+        run: mvn clean package -DskipTests
+
+      - name: Log into Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: "kevlargroup"
+          password: "REMOVED_TOKEN"
+
+      - name: Build and push Backend Service
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            kevlargroup/psn-rwanda-backend:latest
+            kevlargroup/psn-rwanda-backend:${{ github.sha }}
+          build-args: |
+            SPRING_PROFILES_ACTIVE=prod
+          cache-from: type=registry,ref=kevlargroup/psn-rwanda-backend:latest
+          cache-to: type=inline
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: "192.34.56.124"
+          username: "root"
+          password: "KevlarGroup1.rw"
+          port: "22"
+          script: |
+            cd /opt/psn_rwanda/backend
+            git pull origin main
+            docker-compose -f docker-compose.prod.yml pull
+            docker-compose -f docker-compose.prod.yml up -d --force-recreate
+            docker image prune -f 

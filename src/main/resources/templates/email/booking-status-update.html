@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Status Update - PSN Rwanda Ltd</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        .header {
+            background-color: #1B5A7D;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .logo-container {
+            margin-bottom: 15px;
+        }
+        .logo {
+            max-width: 180px;
+            height: auto;
+        }
+        .content {
+            padding: 30px 20px;
+        }
+        .footer {
+            background-color: #f2f2f2;
+            padding: 15px;
+            text-align: center;
+            font-size: 12px;
+            color: #666666;
+            border-top: 3px solid #F48E41;
+        }
+        .booking-details {
+            background-color: #f7f7f7;
+            border-left: 4px solid #F48E41;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .status-box {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .status-pending {
+            background-color: #fff6e6;
+            color: #e6a142;
+            border: 1px solid #f6d6a5;
+        }
+        .status-approved {
+            background-color: #e6f7f0;
+            color: #2ecc71;
+            border: 1px solid #c3e6d4;
+        }
+        .status-in-progress {
+            background-color: #e6f3ff;
+            color: #3498db;
+            border: 1px solid #b8d9f8;
+        }
+        .status-completed {
+            background-color: #e6f7f0;
+            color: #27ae60;
+            border: 1px solid #b8ebd0;
+        }
+        .status-rejected {
+            background-color: #fceaea;
+            color: #e74c3c;
+            border: 1px solid #f8c9c5;
+        }
+        .status-cancelled {
+            background-color: #f2f2f2;
+            color: #7f8c8d;
+            border: 1px solid #e0e0e0;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: #F48E41;
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .contact-info {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid #eeeeee;
+            font-size: 14px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 15px 0;
+        }
+        th {
+            background-color: #1B5A7D;
+            color: white;
+            text-align: left;
+            padding: 10px;
+        }
+        td {
+            padding: 8px 10px;
+            border-bottom: 1px solid #eeeeee;
+        }
+        .tracking-number {
+            color: #1B5A7D;
+            font-weight: bold;
+        }
+        .highlight {
+            color: #F48E41;
+            font-weight: bold;
+        }
+        .status-message {
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            border: 1px solid #eeeeee;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <div class="logo-container">
+                <!-- Logo is included as base64 or via URL -->
+                <img src="cid:company-logo" alt="PSN Rwanda Ltd" class="logo">
+            </div>
+            <h1>Booking Status Update</h1>
+        </div>
+        
+        <div class="content">
+            <p>Dear <span th:text="${clientName}">Client</span>,</p>
+            
+            <p>We are writing to inform you that your booking with <strong>PSN Rwanda Ltd</strong> has been updated.</p>
+            
+            <!-- Status box with dynamic class based on status -->
+            <div th:class="${'status-box status-' + #strings.toLowerCase(#strings.replace(bookingStatus, '_', '-'))}">
+                Your booking is now: <span th:text="${bookingStatus}">APPROVED</span>
+            </div>
+            
+            <div class="status-message" th:if="${statusMessage != null && !statusMessage.isEmpty()}">
+                <p><strong>Additional Information:</strong></p>
+                <p th:text="${statusMessage}">Your appointment has been scheduled for July 15th at 10:30 AM.</p>
+            </div>
+            
+            <div class="booking-details">
+                <h3>Booking Details:</h3>
+                <table>
+                    <tr>
+                        <th>Tracking Number</th>
+                        <td><span class="tracking-number" th:text="${trackingNumber}">PSN-001</span></td>
+                    </tr>
+                    <tr>
+                        <th>Service</th>
+                        <td th:text="${serviceName}">Notary Services</td>
+                    </tr>
+                    <tr>
+                        <th>Updated On</th>
+                        <td th:text="${updatedDate}">2023-07-15 10:30:00</td>
+                    </tr>
+                    <tr th:if="${notes != null && !notes.isEmpty()}">
+                        <th>Notes</th>
+                        <td th:text="${notes}">Special requirements noted</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div th:if="${bookingStatus == 'APPROVED' || bookingStatus == 'IN_PROGRESS'}" style="margin: 20px 0;">
+                <p>Please ensure you have all necessary documents ready for your appointment. If you have any questions or need to reschedule, please contact us as soon as possible.</p>
+            </div>
+            
+            <div th:if="${bookingStatus == 'REJECTED'}" style="margin: 20px 0;">
+                <p>We regret to inform you that your booking could not be processed at this time. Please contact our office for more information and to discuss alternative options.</p>
+            </div>
+            
+            <div th:if="${bookingStatus == 'COMPLETED'}" style="margin: 20px 0;">
+                <p>Thank you for choosing PSN Rwanda Ltd. It has been our pleasure to serve you. We hope you were satisfied with our services.</p>
+            </div>
+            
+            <center>
+                <a th:href="${trackingUrl}" class="cta-button">Track Your Booking</a>
+            </center>
+            
+            <div class="contact-info">
+                <p>If you have any questions or need further assistance, please don't hesitate to contact us:</p>
+                <p>
+                    <strong>Phone:</strong> +250 788 859 612<br>
+                    <strong>Email:</strong> info@psnrwanda.com<br>
+                    <strong>Address:</strong> Nyamabuye, Muhanga, Southern Province, Rwanda
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 2023 PSN Rwanda Ltd. All rights reserved.</p>
+            <p>Company Code: 121058604 | Incorporated On: 23/01/2023</p>
+            <p>This email was sent to you because you have a booking with PSN Rwanda Ltd.</p>
+        </div>
+    </div>
+</body>
+</html> 

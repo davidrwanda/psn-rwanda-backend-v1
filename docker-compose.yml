@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: psn-rwanda-backend-dev
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/psn_rwanda
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - APP_FILE_UPLOAD_DIR=/app/uploads
+    volumes:
+      - ./uploads:/app/uploads
+    depends_on:
+      - db
+    networks:
+      - psn-network-dev
+
+  db:
+    image: postgres:15-alpine
+    container_name: psn-rwanda-postgres-dev
+    restart: always
+    environment:
+      - POSTGRES_DB=psn_rwanda
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - psn-db-data-dev:/var/lib/postgresql/data
+    networks:
+      - psn-network-dev
+
+networks:
+  psn-network-dev:
+    driver: bridge
+
+volumes:
+  psn-db-data-dev:
+    driver: local 

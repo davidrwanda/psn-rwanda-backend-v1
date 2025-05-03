@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Booking Notification - PSN Rwanda Ltd</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        .header {
+            background-color: #1B5A7D;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .logo-container {
+            margin-bottom: 15px;
+        }
+        .logo {
+            max-width: 180px;
+            height: auto;
+        }
+        .content {
+            padding: 30px 20px;
+        }
+        .footer {
+            background-color: #f2f2f2;
+            padding: 15px;
+            text-align: center;
+            font-size: 12px;
+            color: #666666;
+            border-top: 3px solid #F48E41;
+        }
+        .alert-box {
+            background-color: #f6e9db;
+            border-left: 4px solid #F48E41;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .booking-details {
+            background-color: #f0f7fc;
+            border-left: 4px solid #1B5A7D;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: #1B5A7D;
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 15px 0;
+        }
+        th {
+            background-color: #1B5A7D;
+            color: white;
+            text-align: left;
+            padding: 10px;
+        }
+        td {
+            padding: 8px 10px;
+            border-bottom: 1px solid #eeeeee;
+        }
+        .highlight {
+            color: #F48E41;
+            font-weight: bold;
+        }
+        .client-info {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        .documents-list {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <div class="logo-container">
+                <img src="cid:company-logo" alt="PSN Rwanda Ltd" class="logo">
+            </div>
+            <h1>New Booking Notification</h1>
+        </div>
+        
+        <div class="content">
+            <div class="alert-box">
+                <h3>A new booking has been received!</h3>
+                <p>
+                    A client has submitted a new booking for <span class="highlight" th:text="${serviceName}">Notary Services</span>.
+                    Please review and process this booking at your earliest convenience.
+                </p>
+            </div>
+            
+            <div class="booking-details">
+                <h3>Booking Information:</h3>
+                <table>
+                    <tr>
+                        <th>Booking ID</th>
+                        <td th:text="${bookingId}">1</td>
+                    </tr>
+                    <tr>
+                        <th>Tracking Number</th>
+                        <td class="highlight" th:text="${trackingNumber}">PSN-001</td>
+                    </tr>
+                    <tr>
+                        <th>Service</th>
+                        <td th:text="${serviceName}">Notary Services</td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td th:text="${bookingStatus}">PENDING</td>
+                    </tr>
+                    <tr>
+                        <th>Date Created</th>
+                        <td th:text="${createdDate}">2023-07-15 10:30:00</td>
+                    </tr>
+                    <tr th:if="${notes != null && !notes.isEmpty()}">
+                        <th>Notes</th>
+                        <td th:text="${notes}">Special requirements noted</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="client-info">
+                <h3>Client Information:</h3>
+                <table>
+                    <tr>
+                        <th>Phone Number</th>
+                        <td th:text="${phoneNumber}">+250788123456</td>
+                    </tr>
+                    <tr th:if="${email != null && !email.isEmpty()}">
+                        <th>Email</th>
+                        <td th:text="${email}">client@example.com</td>
+                    </tr>
+                    <tr th:if="${fullName != null && !fullName.isEmpty()}">
+                        <th>Full Name</th>
+                        <td th:text="${fullName}">John Doe</td>
+                    </tr>
+                    <tr th:if="${userId != null}">
+                        <th>User ID</th>
+                        <td th:text="${userId}">123</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div th:if="${documents != null && !documents.isEmpty()}" class="documents-list">
+                <h3>Uploaded Documents:</h3>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>File Name</th>
+                        <th>Type</th>
+                        <th>Size</th>
+                    </tr>
+                    <tr th:each="doc : ${documents}">
+                        <td th:text="${doc.id}">1</td>
+                        <td th:text="${doc.fileName}">document.pdf</td>
+                        <td th:text="${doc.fileType}">application/pdf</td>
+                        <td th:text="${doc.fileSize + ' bytes'}">1024000 bytes</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <center>
+                <a th:href="${adminUrl}" class="cta-button">Manage Booking in Admin Panel</a>
+            </center>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 2023 PSN Rwanda Ltd. All rights reserved.</p>
+            <p>This is an automated message from the PSN Rwanda Ltd Booking System.</p>
+        </div>
+    </div>
+</body>
+</html> 

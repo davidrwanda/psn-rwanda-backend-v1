@@ -1,0 +1,49 @@
+# Git
+.git
+.gitignore
+.github
+
+# Maven build files
+target/
+!target/app.jar
+
+# Docker files
+docker-compose*.yml
+Dockerfile*
+.dockerignore
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+*.sublime-*
+.project
+.classpath
+.settings/
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+tmp/
+temp/
+
+# Node modules (if any)
+node_modules/
+
+# Miscellaneous
+README.md
+LICENSE
+*.md
+!email-deliverability-guide.md
+
+# Local configuration files
+application-local.properties
+application-local.yml
+
+# Test files
+**/test/
+
+# Upload directory
+uploads/ 

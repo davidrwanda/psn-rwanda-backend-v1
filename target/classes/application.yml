@@ -1,0 +1,92 @@
+spring:
+  application:
+    name: psn-rwanda-api
+  
+  # Database Configuration
+  datasource:
+    url: jdbc:postgresql://localhost:5432/psn_rwanda
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  
+  # JPA Configuration
+  jpa:
+    hibernate:
+      ddl-auto: validate # Use validate with Flyway for production
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: false
+  
+  # Flyway Configuration
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+  
+  # Jackson Configuration
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+    deserialization:
+      fail-on-unknown-properties: false
+
+# Server Configuration
+server:
+  port: 8082
+  servlet:
+    context-path: /
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: never
+    include-exception: false
+
+# Security & JWT Configuration
+security:
+  jwt:
+    token:
+      secret-key: ${JWT_SECRET:d2VsbCB0aGlzIGlzIGEgcmFuZG9tIHNlY3JldCBrZXkgZm9yIHBzbiByd2FuZGEgYXBp}
+      access-token-expire-length: 3600000  # 1 hour in milliseconds
+      refresh-token-expire-length: 2592000000  # 30 days in milliseconds
+
+# Logging Configuration
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: DEBUG
+    org.springframework.security.web: DEBUG
+    org.hibernate: ERROR
+    com.psnrwanda: DEBUG
+
+# API Documentation
+springdoc:
+  api-docs:
+    path: /docs
+  swagger-ui:
+    path: /swagger-ui
+    operationsSorter: method
+    tagsSorter: alpha
+    
+# Custom Application Configuration
+app:
+  cors:
+    allowed-origins: http://localhost:3000, https://psnrwanda.com
+    allowed-methods: GET, POST, PUT, PATCH, DELETE, OPTIONS
+    allowed-headers: "*"
+    exposed-headers: Authorization
+  sms:
+    enabled: false # Set to true when connected to SMS gateway
+    api-key: ${SMS_API_KEY:your-sms-api-key}
+    api-url: ${SMS_API_URL:https://sms-api-provider.com/send}
+  company:
+    name: PSN RWANDA Ltd
+    code: 121058604
+    incorporated-on: 2023-01-23
+    phone: +250 788 859 612
+    email: casybizy@gmail.com
+    address: Nyamabuye, Muhanga, Southern Province, Rwanda
+    description: Legal Activities (Notary Services), Consultancy, Leasing, Real Estate, R&D 
