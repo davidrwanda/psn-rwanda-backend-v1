@@ -296,6 +296,7 @@ The backend application is running on port 4040 on the production server.
 The application uses the following environment variables in production:
 
 - `SPRING_PROFILES_ACTIVE`: The active Spring profile (prod)
+- `SERVER_PORT`: Port to run the application on (4040)
 - `SPRING_DATASOURCE_URL`: JDBC URL for the database
 - `SPRING_DATASOURCE_USERNAME`: Database username
 - `SPRING_DATASOURCE_PASSWORD`: Database password
@@ -306,4 +307,30 @@ The application uses the following environment variables in production:
 - `APP_NOTIFICATION_PROVIDER_EMAIL`: Email address that receives booking notifications
 - `APP_FILE_UPLOAD_DIR`: Directory for file uploads
 - `APP_URL`: Public URL of the application
-- `JWT_SECRET`: Secret key for JWT authentication 
+- `JWT_SECRET`: Secret key for JWT authentication
+
+### Setting Up Environment Variables
+
+1. For local development:
+   - Copy `.env.example` to `.env`
+   - Fill in your values in the `.env` file
+   - The Docker Compose setup will automatically use these values
+
+2. For production deployment:
+   - Use environment variables in your CI/CD pipeline or server environment
+   - Avoid storing sensitive values in configuration files
+
+### GitHub Secrets Setup
+
+For the CI/CD pipeline to work correctly, you need to add the following secrets to your GitHub repository:
+
+1. `DOCKER_HUB_USERNAME`: Your Docker Hub username
+2. `DOCKER_HUB_PAT`: Your Docker Hub Personal Access Token
+3. `SERVER_HOST`: Your server's IP address or hostname
+4. `SERVER_USERNAME`: SSH username for your server
+5. `SERVER_PASSWORD`: SSH password for your server
+
+To add these secrets:
+1. Go to your GitHub repository
+2. Navigate to Settings > Secrets and variables > Actions
+3. Click on "New repository secret" and add each of the required secrets 

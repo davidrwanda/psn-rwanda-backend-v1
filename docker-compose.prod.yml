@@ -12,14 +12,14 @@ services:
       - SERVER_PORT=4040
       # Database configuration
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/psn_rwanda
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_DATASOURCE_USERNAME=${DB_USERNAME:-postgres}
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD:-postgres}
       # Email configuration
-      - SPRING_MAIL_HOST=mail.infomaniak.com
-      - SPRING_MAIL_PORT=465
-      - SPRING_MAIL_USERNAME=info@oneclic.vet
-      - SPRING_MAIL_PASSWORD=Infooneclic123!!
-      - APP_NOTIFICATION_PROVIDER_EMAIL=daveleo250@gmail.com
+      - SPRING_MAIL_HOST=${MAIL_HOST:-mail.infomaniak.com}
+      - SPRING_MAIL_PORT=${MAIL_PORT:-465}
+      - SPRING_MAIL_USERNAME=${MAIL_USERNAME:-info@oneclic.vet}
+      - SPRING_MAIL_PASSWORD=${MAIL_PASSWORD}
+      - APP_NOTIFICATION_PROVIDER_EMAIL=${PROVIDER_EMAIL:-daveleo250@gmail.com}
       # File storage
       - APP_FILE_UPLOAD_DIR=/app/uploads
     volumes:
@@ -35,8 +35,8 @@ services:
     restart: always
     environment:
       - POSTGRES_DB=psn_rwanda
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=${DB_USERNAME:-postgres}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-postgres}
     volumes:
       - psn-db-data:/var/lib/postgresql/data
     networks:
