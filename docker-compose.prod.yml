@@ -17,7 +17,7 @@ services:
       - SPRING_MAIL_PORT=${MAIL_PORT:-465}
       - SPRING_MAIL_USERNAME=${MAIL_USERNAME:-info@oneclic.vet}
       - SPRING_MAIL_PASSWORD=${MAIL_PASSWORD:-changeme}
-      - APP_NOTIFICATION_PROVIDER_EMAIL=${PROVIDER_EMAIL:-daveleo250@gmail.com}
+      - APP_NOTIFICATION_PROVIDER_EMAIL=${PROVIDER_EMAIL:-casybizy@gmail.com}
       # File storage
       - APP_FILE_UPLOAD_DIR=/app/uploads
     volumes:
